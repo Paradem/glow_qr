@@ -4,3 +4,7 @@
 options:
   label:
     fly_launch_runtime: rails
+  sqlite3: true
+  packages:
+    deploy:
+    - imagemagick
