@@ -1,0 +1,64 @@
+<h2>Preview Page Design</h2>
+<p class="subtitle">After generating a QR code - what does the user see?</p>
+
+<div class="cards">
+  <div class="card" data-choice="focused" onclick="toggleSelect(this)">
+    <div class="card-image" style="background: #0a0a0f; padding: 20px;">
+      <div style="max-width: 320px; margin: 0 auto; text-align: center;">
+        <p style="color: #ff00ff; font-size: 14px; margin-bottom: 8px;">✨ Your QR Code</p>
+        <div style="width: 200px; height: 200px; margin: 0 auto 16px; border-radius: 50%; border: 4px solid #ff00ff; box-shadow: 0 0 30px rgba(255,0,255,0.5); display: flex; justify-content: center; align-items: center;">
+          <div style="width: 150px; height: 150px; background: white; border-radius: 50%;"></div>
+        </div>
+        <div style="background: linear-gradient(90deg, #ff00ff, #ff6600); border-radius: 8px; padding: 14px; color: white; font-weight: bold; margin-bottom: 12px;">Download PNG</div>
+        <div style="background: #1a1a24; border: 1px solid #333; border-radius: 8px; padding: 12px; display: flex; gap: 8px;">
+          <input type="text" style="flex: 1; background: transparent; border: none; color: #888; font-size: 12px;" value="glowqr.fly.dev/abc123">
+          <button style="background: #ff00ff; color: white; border: none; border-radius: 4px; padding: 6px 12px; font-size: 12px;">Copy</button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>QR Focus</h3>
+      <p>Giant QR code, one clear action, link copy. Nothing else.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="social" onclick="toggleSelect(this)">
+    <div class="card-image" style="background: #0a0a0f; padding: 20px;">
+      <div style="max-width: 320px; margin: 0 auto; text-align: center;">
+        <p style="color: #ff00ff; font-size: 14px; margin-bottom: 8px;">✨ Your QR Code</p>
+        <div style="width: 160px; height: 160px; margin: 0 auto 16px; border-radius: 50%; border: 4px solid #ff00ff; box-shadow: 0 0 30px rgba(255,0,255,0.5); display: flex; justify-content: center; align-items: center;">
+          <div style="width: 120px; height: 120px; background: white; border-radius: 50%;"></div>
+        </div>
+        <div style="background: linear-gradient(90deg, #ff00ff, #ff6600); border-radius: 8px; padding: 14px; color: white; font-weight: bold; margin-bottom: 16px;">Download PNG</div>
+        <p style="color: #666; font-size: 12px; margin-bottom: 12px;">Share it:</p>
+        <div style="display: flex; justify-content: center; gap: 12px;">
+          <div style="width: 40px; height: 40px; background: #1a1a24; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #666;">X</div>
+          <div style="width: 40px; height: 40px; background: #1a1a24; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #666;">in</div>
+          <div style="width: 40px; height: 40px; background: #1a1a24; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #666;">f</div>
+        </div>
+        <p style="color: #444; font-size: 11px; margin-top: 16px;">Create another →</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Social Ready</h3>
+      <p>QR + download + social share buttons. Viral potential.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="minimal" onclick="toggleSelect(this)">
+    <div class="card-image" style="background: #0a0a0f; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 300px;">
+      <div style="text-align: center;">
+        <div style="width: 250px; height: 250px; border-radius: 50%; border: 3px solid #ff00ff; box-shadow: 0 0 30px rgba(255,0,255,0.5); display: flex; justify-content: center; align-items: center; margin-bottom: 16px;">
+          <div style="width: 180px; height: 180px; background: white; border-radius: 50%;"></div>
+        </div>
+        <div style="background: linear-gradient(90deg, #ff00ff, #ff6600); border-radius: 8px; padding: 14px 32px; color: white; font-weight: bold; display: inline-block;">Download</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Ultra Minimal</h3>
+      <p>Just the QR and one button. No distractions. Premium feel.</p>
+    </div>
+  </div>
+</div>
+
+<p style="margin-top: 24px; color: #888;">Click to select preview page style</p>

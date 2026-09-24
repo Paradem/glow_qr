@@ -1,0 +1,12 @@
+#!/bin/bash -e
+
+# If running the rails server then create or migrate existing database
+if [[ "$*" == *"./bin/rails server"* ]]; then
+  # Ensure storage directory exists (needed for SQLite and Active Storage)
+  mkdir -p /rails/storage /rails/tmp
+  
+  # Run database migrations/creation
+  ./bin/rails db:prepare
+fi
+
+exec "${@}"

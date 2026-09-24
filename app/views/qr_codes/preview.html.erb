@@ -1,0 +1,53 @@
+<div class="w-full max-w-md">
+  <%# Logo %>
+  <div class="text-center mb-8">
+    <a href="/" class="text-[#ff00ff] text-6xl font-bold hover:opacity-80 transition-opacity">
+      ✨ GlowQR
+    </a>
+  </div>
+
+  <%# QR Code Display %>
+  <div class="text-center mb-6">
+    <% if @qr_code.has_neon_border? %>
+      <div class="inline-block p-3 <%= @qr_code.has_neon_border? ? 'rounded-full border-4 border-[#ff00ff] shadow-[0_0_30px_rgba(255,0,255,0.5)]' : '' %> bg-white">
+    <% else %>
+      <div class="inline-block p-3 bg-white <%= @qr_code.image_shape_class %> border-2 border-[#333333]">
+    <% end %>
+      <%= image_tag @qr_code.image,
+                    alt: "QR Code",
+                    class: "w-48 h-48 mx-auto #{@qr_code.image_shape_class}" %>
+    </div>
+  </div>
+
+  <%# Template Name %>
+  <p class="text-center text-[#666666] text-sm mb-6">
+    <%= @qr_code.template_name %> template
+  </p>
+
+  <%# Download Button %>
+  <%= link_to "Download PNG",
+              @qr_code.image,
+              download: "qr_#{@qr_code.short_code}.png",
+              class: "block w-full text-center bg-gradient-to-r from-[#ff00ff] to-[#ff6600] text-white font-semibold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity mb-4" %>
+
+  <%# Share Link %>
+  <div class="bg-[#1a1a24] border border-[#333333] rounded-lg p-3 flex gap-2">
+    <input
+      type="text"
+      value="<%= request.original_url %>"
+      readonly
+      class="flex-1 bg-transparent text-[#888888] text-sm outline-none"
+    />
+    <button
+      onclick="navigator.clipboard.writeText('<%= request.original_url %>'); this.textContent = 'Copied!'; setTimeout(() => this.textContent = 'Copy', 2000)"
+      class="bg-[#ff00ff] text-white text-sm font-medium px-3 py-1 rounded hover:opacity-90 transition-opacity"
+    >
+      Copy
+    </button>
+  </div>
+
+  <%# Create Another %>
+  <div class="text-center mt-8">
+    <%= link_to "Create another QR code", root_path, class: "text-[#444444] hover:text-[#666666] text-sm transition-colors" %>
+  </div>
+</div>

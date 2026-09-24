@@ -1,0 +1,8 @@
+---
+:quiet: true
+:note: |
+  The Command Injection warnings in lib/qr_templates/circle_frame.rb and 
+  lib/qr_templates/disco_ball.rb are false positives. The paths passed to 
+  Open3.capture3 come from Tempfile.create (system temp paths) and 
+  /tmp/qr_temp_* files with process ID and random numbers - none are 
+  user-controlled.

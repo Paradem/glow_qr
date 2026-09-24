@@ -1,0 +1,53 @@
+<div class="w-full max-w-md">
+  <%# Logo %>
+  <div class="text-center mb-8">
+    <a href="/" class="text-[#ff00ff] text-6xl font-bold hover:opacity-80 transition-opacity">
+      ✨ GlowQR
+    </a>
+  </div>
+
+  <%# Hero %>
+  <div class="text-center mb-8">
+    <h1 class="text-3xl font-bold text-white mb-2">
+      QR codes in 30 seconds
+    </h1>
+    <p class="text-[#666666] text-sm">
+      No signup. Just paste & go.
+    </p>
+  </div>
+
+  <%# Form Card %>
+  <div class="bg-[#1a1a24] border border-[#333333] rounded-xl p-6">
+    <form action="/qr_codes" method="POST" class="flex flex-col gap-4">
+      <%# URL Input %>
+      <input
+        type="url"
+        name="url"
+        placeholder="Paste your URL here..."
+        required
+        class="w-full bg-[#0f0f18] border border-[#333333] rounded-lg px-4 py-3 text-white placeholder-[#666666] focus:outline-none focus:border-[#ff00ff] transition-colors"
+      />
+
+      <%# Template Selector %>
+      <div class="grid grid-cols-2 gap-3">
+        <% @templates.each do |template| %>
+          <label class="cursor-pointer group">
+            <input type="radio" name="template" value="<%= template[:id] %>" class="sr-only peer" <%= template[:featured] ? "checked" : "" %> />
+            <div class="border-2 border-[#333333] rounded-lg p-4 text-center transition-all peer-checked:border-[#ff00ff] peer-checked:shadow-[0_0_15px_rgba(255,0,255,0.3)] group-hover:border-[#555555]">
+              <div class="text-3xl mb-2"><%= template[:emoji] %></div>
+              <div class="text-xs font-medium text-[#888888]"><%= template[:name] %></div>
+            </div>
+          </label>
+        <% end %>
+      </div>
+
+      <%# Submit Button %>
+      <button
+        type="submit"
+        class="w-full bg-gradient-to-r from-[#ff00ff] to-[#ff6600] text-white font-semibold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity"
+      >
+        Generate Free
+      </button>
+    </form>
+  </div>
+</div>

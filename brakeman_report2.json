@@ -1,0 +1,321 @@
+{
+  "scan_info": {
+    "app_path": "/home/kevin/Projects/AISlop/qr_codes/.worktrees/phase1",
+    "rails_version": "8.1.3",
+    "security_warnings": 10,
+    "start_time": "2026-04-15 13:50:05 -0600",
+    "end_time": "2026-04-15 13:50:05 -0600",
+    "duration": 0.163107089,
+    "checks_performed": [
+      "BasicAuth",
+      "BasicAuthTimingAttack",
+      "CSRFTokenForgeryCVE",
+      "ContentTag",
+      "CookieSerialization",
+      "CreateWith",
+      "CrossSiteScripting",
+      "DefaultRoutes",
+      "Deserialize",
+      "DetailedExceptions",
+      "DigestDoS",
+      "DynamicFinders",
+      "EOLRails",
+      "EOLRuby",
+      "EscapeFunction",
+      "Evaluation",
+      "Execute",
+      "FileAccess",
+      "FileDisclosure",
+      "FilterSkipping",
+      "ForgerySetting",
+      "HeaderDoS",
+      "I18nXSS",
+      "JRubyXML",
+      "JSONEncoding",
+      "JSONEntityEscape",
+      "JSONParsing",
+      "LinkTo",
+      "LinkToHref",
+      "MailTo",
+      "MassAssignment",
+      "MimeTypeDoS",
+      "ModelAttrAccessible",
+      "ModelAttributes",
+      "ModelSerialize",
+      "NestedAttributes",
+      "NestedAttributesBypass",
+      "NumberToCurrency",
+      "PageCachingCVE",
+      "Pathname",
+      "PermitAttributes",
+      "QuoteTableName",
+      "Ransack",
+      "Redirect",
+      "RegexDoS",
+      "Render",
+      "RenderDoS",
+      "RenderInline",
+      "RenderRCE",
+      "ResponseSplitting",
+      "RouteDoS",
+      "SQL",
+      "SQLCVEs",
+      "SSLVerify",
+      "SafeBufferManipulation",
+      "SanitizeConfigCve",
+      "SanitizeMethods",
+      "SelectTag",
+      "SelectVulnerability",
+      "Send",
+      "SendFile",
+      "SessionManipulation",
+      "SessionSettings",
+      "SimpleFormat",
+      "SingleQuotes",
+      "SkipBeforeFilter",
+      "SprocketsPathTraversal",
+      "StripTags",
+      "SymbolDoSCVE",
+      "TemplateInjection",
+      "TranslateBug",
+      "UnsafeReflection",
+      "UnsafeReflectionMethods",
+      "ValidationRegex",
+      "VerbConfusion",
+      "WeakRSAKey",
+      "WithoutProtection",
+      "XMLDoS",
+      "YAMLParsing"
+    ],
+    "number_of_controllers": 3,
+    "number_of_models": 2,
+    "number_of_templates": 4,
+    "ruby_version": "4.0.0",
+    "brakeman_version": "8.0.4"
+  },
+  "warnings": [
+    {
+      "warning_type": "Command Injection",
+      "warning_code": 14,
+      "fingerprint": "0bb41c9a0741c7bbf207c6fc904ab9f54ab5a7e1c1fb3c6877a7ea65bab2b415",
+      "check_name": "Execute",
+      "message": "Possible command injection",
+      "file": "lib/qr_templates/disco_ball.rb",
+      "line": 65,
+      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
+      "code": "Open3.capture3(\"magick\", \"-size\", \"#{image_size}x#{image_size}\", \"xc:black\", \"-fill\", \"white\", \"-draw\", \"circle #{center},#{center} #{center},#{(center + circle_radius).to_i}\", output_path)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "QrTemplates::DiscoBall",
+        "method": "create_circle_mask"
+      },
+      "user_input": "image_size",
+      "confidence": "Medium",
+      "cwe_id": [
+        77
+      ]
+    },
+    {
+      "warning_type": "Command Injection",
+      "warning_code": 14,
+      "fingerprint": "1195cd9d34d52b72cacfde6604f40f6d17a65aa26b7550e0183ec18fce115b93",
+      "check_name": "Execute",
+      "message": "Possible command injection",
+      "file": "lib/qr_templates/disco_ball.rb",
+      "line": 87,
+      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
+      "code": "Open3.capture3(\"magick\", \"/tmp/qr_temp_output_#{$$}_#{rand(1000)}.png\", output_path)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "QrTemplates::DiscoBall",
+        "method": "apply_mask_and_convert"
+      },
+      "user_input": "$$",
+      "confidence": "Medium",
+      "cwe_id": [
+        77
+      ]
+    },
+    {
+      "warning_type": "Command Injection",
+      "warning_code": 14,
+      "fingerprint": "1e890de5b89cc37e566d8fae58cbbda92f991587dbbb8b3cae82f714fdd520e0",
+      "check_name": "Execute",
+      "message": "Possible command injection",
+      "file": "lib/qr_templates/disco_ball.rb",
+      "line": 81,
+      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
+      "code": "Open3.capture3(\"magick\", mask_path, \"-alpha\", \"on\", \"/tmp/qr_temp_mask_#{$$}_#{rand(1000)}.png\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "QrTemplates::DiscoBall",
+        "method": "apply_mask_and_convert"
+      },
+      "user_input": "$$",
+      "confidence": "Medium",
+      "cwe_id": [
+        77
+      ]
+    },
+    {
+      "warning_type": "Command Injection",
+      "warning_code": 14,
+      "fingerprint": "4d9121c8c8dda40d817655ec77194da4286a4187224e4dc283375ee8382b11fe",
+      "check_name": "Execute",
+      "message": "Possible command injection",
+      "file": "lib/qr_templates/circle_frame.rb",
+      "line": 84,
+      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
+      "code": "Open3.capture3(\"magick\", mask_path, \"-alpha\", \"on\", \"/tmp/qr_temp_mask_#{$$}_#{rand(1000)}.png\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "QrTemplates::CircleFrame",
+        "method": "apply_mask_and_convert"
+      },
+      "user_input": "$$",
+      "confidence": "Medium",
+      "cwe_id": [
+        77
+      ]
+    },
+    {
+      "warning_type": "Command Injection",
+      "warning_code": 14,
+      "fingerprint": "7064da6b10ac41139300b58a37c4345406eecd09874480bec5e77b207bc8ce8d",
+      "check_name": "Execute",
+      "message": "Possible command injection",
+      "file": "lib/qr_templates/disco_ball.rb",
+      "line": 84,
+      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
+      "code": "Open3.capture3(\"magick\", \"/tmp/qr_temp_rgb_#{$$}_#{rand(1000)}.png\", \"/tmp/qr_temp_mask_#{$$}_#{rand(1000)}.png\", \"-compose\", \"CopyOpacity\", \"-composite\", \"-colorspace\", \"sRGB\", \"/tmp/qr_temp_output_#{$$}_#{rand(1000)}.png\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "QrTemplates::DiscoBall",
+        "method": "apply_mask_and_convert"
+      },
+      "user_input": "$$",
+      "confidence": "Medium",
+      "cwe_id": [
+        77
+      ]
+    },
+    {
+      "warning_type": "Command Injection",
+      "warning_code": 14,
+      "fingerprint": "73d63578b9b19691004c4e9bb922b11f488f59d312e41c3cbd60483a5641a879",
+      "check_name": "Execute",
+      "message": "Possible command injection",
+      "file": "lib/qr_templates/circle_frame.rb",
+      "line": 81,
+      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
+      "code": "Open3.capture3(\"magick\", input_path, \"-alpha\", \"off\", \"-colorspace\", \"RGB\", \"/tmp/qr_temp_rgb_#{$$}_#{rand(1000)}.png\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "QrTemplates::CircleFrame",
+        "method": "apply_mask_and_convert"
+      },
+      "user_input": "$$",
+      "confidence": "Medium",
+      "cwe_id": [
+        77
+      ]
+    },
+    {
+      "warning_type": "Command Injection",
+      "warning_code": 14,
+      "fingerprint": "7bfa5b9196f4926d29bf9353d1d301367766755cfe0c7a604aafd56f28ad542a",
+      "check_name": "Execute",
+      "message": "Possible command injection",
+      "file": "lib/qr_templates/circle_frame.rb",
+      "line": 68,
+      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
+      "code": "Open3.capture3(\"magick\", \"-size\", \"#{image_size}x#{image_size}\", \"xc:black\", \"-fill\", \"white\", \"-draw\", \"circle #{center},#{center} #{center},#{(center + circle_radius).to_i}\", output_path)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "QrTemplates::CircleFrame",
+        "method": "create_circle_mask"
+      },
+      "user_input": "image_size",
+      "confidence": "Medium",
+      "cwe_id": [
+        77
+      ]
+    },
+    {
+      "warning_type": "Command Injection",
+      "warning_code": 14,
+      "fingerprint": "af64be3391b14e6da13b63cd722d2ba26d8224218c02c92a1be80f6e715dd48f",
+      "check_name": "Execute",
+      "message": "Possible command injection",
+      "file": "lib/qr_templates/circle_frame.rb",
+      "line": 87,
+      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
+      "code": "Open3.capture3(\"magick\", \"/tmp/qr_temp_rgb_#{$$}_#{rand(1000)}.png\", \"/tmp/qr_temp_mask_#{$$}_#{rand(1000)}.png\", \"-compose\", \"CopyOpacity\", \"-composite\", \"-colorspace\", \"sRGB\", \"/tmp/qr_temp_output_#{$$}_#{rand(1000)}.png\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "QrTemplates::CircleFrame",
+        "method": "apply_mask_and_convert"
+      },
+      "user_input": "$$",
+      "confidence": "Medium",
+      "cwe_id": [
+        77
+      ]
+    },
+    {
+      "warning_type": "Command Injection",
+      "warning_code": 14,
+      "fingerprint": "c1bba868115c156323c621e2f684b9d2444df299d9ff8208a33ba17e86632a30",
+      "check_name": "Execute",
+      "message": "Possible command injection",
+      "file": "lib/qr_templates/circle_frame.rb",
+      "line": 90,
+      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
+      "code": "Open3.capture3(\"magick\", \"/tmp/qr_temp_output_#{$$}_#{rand(1000)}.png\", output_path)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "QrTemplates::CircleFrame",
+        "method": "apply_mask_and_convert"
+      },
+      "user_input": "$$",
+      "confidence": "Medium",
+      "cwe_id": [
+        77
+      ]
+    },
+    {
+      "warning_type": "Command Injection",
+      "warning_code": 14,
+      "fingerprint": "d0c901b3f433793542a0180f3f57295b23972e18c2060eadb888dee5f6e563f7",
+      "check_name": "Execute",
+      "message": "Possible command injection",
+      "file": "lib/qr_templates/disco_ball.rb",
+      "line": 78,
+      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
+      "code": "Open3.capture3(\"magick\", input_path, \"-alpha\", \"off\", \"-colorspace\", \"RGB\", \"/tmp/qr_temp_rgb_#{$$}_#{rand(1000)}.png\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "QrTemplates::DiscoBall",
+        "method": "apply_mask_and_convert"
+      },
+      "user_input": "$$",
+      "confidence": "Medium",
+      "cwe_id": [
+        77
+      ]
+    }
+  ],
+  "ignored_warnings": [],
+  "errors": [],
+  "obsolete": []
+}
