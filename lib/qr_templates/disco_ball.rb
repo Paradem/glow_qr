@@ -41,7 +41,7 @@ module QrTemplates
 
     def circle_radius
       @circle_radius ||= begin
-        diagonal = qr_pixel_size * Math.sqrt(2)
+        diagonal = (qr_pixel_size + module_size * 8) * Math.sqrt(2)
         (diagonal / 2) + 15
       end
     end
@@ -84,7 +84,7 @@ module QrTemplates
         _stdout, _stderr, status = Open3.capture3("magick", temp_rgb, temp_mask_rgba, "-compose", "CopyOpacity", "-composite", "-colorspace", "sRGB", temp_output)
         raise "ImageMagick failed: #{_stderr}" unless status.success?
 
-        _stdout, _stderr, status = Open3.capture3("magick", temp_output, output_path)
+        _stdout, _stderr, status = Open3.capture3("magick", temp_output, "PNG32:#{output_path}")
         raise "ImageMagick failed: #{_stderr}" unless status.success?
       ensure
         File.delete(temp_rgb) if File.exist?(temp_rgb)
@@ -131,8 +131,8 @@ module QrTemplates
 
     def draw_decorative_circles(png)
       fg = ChunkyPNG::Color("black")
-      qr_offset = (image_size - qr_pixel_size) / 2
-      qr_half = qr_pixel_size / 2
+      # Keep decoration outside the QR code's four-module quiet zone.
+      qr_half = qr_pixel_size / 2 + module_size * 4
 
       rng = Random.new(42)
 
@@ -144,7 +144,7 @@ module QrTemplates
 
         qr_edge_dist = [ qr_half / abs_cos, qr_half / abs_sin ].min
 
-        min_dist = qr_edge_dist + 5
+        min_dist = qr_edge_dist + module_size
         max_dist = circle_radius - 4
 
         next if min_dist >= max_dist

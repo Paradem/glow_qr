@@ -5,11 +5,24 @@ class QrCode < ApplicationRecord
 
   has_one_attached :image
 
+  normalizes :url, with: ->(url) { url.strip }
+
   validates :url, presence: true, length: { maximum: 2048 }
+  validate :http_url
   validates :short_code, uniqueness: true, length: { is: 6 }
   validates :template, presence: true,
-                       inclusion: { in: 1..10,
-                                    message: "must be between 1 and 10" }
+                       inclusion: { in: QrGeneratorService::TEMPLATES.keys,
+                                    message: "must be one of the available styles" }
+
+  def http_url
+    return if url.blank?
+
+    uri = URI.parse(url)
+    errors.add(:url, "must be a valid http:// or https:// link") unless uri.is_a?(URI::HTTP) && uri.host.present?
+  rescue URI::InvalidURIError
+    errors.add(:url, "must be a valid http:// or https:// link")
+  end
+  private :http_url
 
   def to_param
     short_code

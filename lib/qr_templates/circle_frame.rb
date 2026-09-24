@@ -45,7 +45,7 @@ module QrTemplates
 
     def circle_radius
       @circle_radius ||= begin
-        diagonal = qr_pixel_size * Math.sqrt(2)
+        diagonal = (qr_pixel_size + module_size * 8) * Math.sqrt(2)
         (diagonal / 2) + 10
       end
     end
@@ -87,7 +87,7 @@ module QrTemplates
         _stdout, _stderr, status = Open3.capture3("magick", temp_rgb, temp_mask_rgba, "-compose", "CopyOpacity", "-composite", "-colorspace", "sRGB", temp_output)
         raise "ImageMagick failed: #{_stderr}" unless status.success?
 
-        _stdout, _stderr, status = Open3.capture3("magick", temp_output, output_path)
+        _stdout, _stderr, status = Open3.capture3("magick", temp_output, "PNG32:#{output_path}")
         raise "ImageMagick failed: #{_stderr}" unless status.success?
       ensure
         File.delete(temp_rgb) if File.exist?(temp_rgb)

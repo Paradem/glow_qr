@@ -1,27 +1,36 @@
 <!DOCTYPE html>
-<html class="h-full">
+<html lang="en">
   <head>
-    <title><%= content_for(:title) || "GlowQR" %></title>
+    <title><%= content_for(:title) || "GlowQR — A little link. A lot of possibility." %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Turn your links into beautiful QR codes. Choose a style, download a PNG, and share. Free, with no signup.">
+    <meta name="theme-color" content="#f8f7fc">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="application-name" content="GlowQR">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= yield :head %>
-
-    <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
-
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-
-  <body class="h-full bg-[#0a0a0f] text-white antialiased">
-    <main class="min-h-screen flex flex-col items-center justify-center px-5 py-12">
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <header class="site-header page-width">
+      <%= link_to root_path, class: "brand", aria: { label: "GlowQR home" } do %>
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+        Glow<span class="brand-accent">QR</span>
+      <% end %>
+      <span class="header-note"><span class="status-dot" aria-hidden="true"></span> Little links. Big possibilities.</span>
+    </header>
+    <main id="main" class="page-width">
       <%= yield %>
     </main>
+    <footer class="site-footer page-width">
+      <span>A little glow goes a long way.</span>
+      <span>Free to create. Ready to share.</span>
+    </footer>
   </body>
 </html>

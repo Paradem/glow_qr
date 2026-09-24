@@ -13,7 +13,8 @@ class QrGeneratorService
   }.freeze
 
   def self.generate(url, template: 1, customizations: {})
-    qrcode = RQRCode::QRCode.new(url, level: :h, size: 6)
+    # Choose the smallest version that fits, including the complete query string.
+    qrcode = RQRCode::QRCode.new(url, level: :h)
     template_class = TEMPLATES[template] || QrTemplates::Classic
 
     customizations[:foreground] ||= "black"
@@ -22,6 +23,6 @@ class QrGeneratorService
     renderer = template_class.new(qrcode, customizations)
     png_data = renderer.render_png
 
-    { matrix: qrcode.instance_variable_get(:@qrcode).modules, png_data: png_data }
+    { matrix: qrcode.modules, png_data: png_data }
   end
 end

@@ -18,6 +18,23 @@ class QrCodeTest < ActiveSupport::TestCase
     assert_includes qr.errors[:url], "can't be blank"
   end
 
+  test "rejects non-web and malformed URLs" do
+    [ "javascript:alert(1)", "ftp://example.com", "https://", "not a url" ].each do |url|
+      assert_not QrCode.new(url: url).valid?, url
+    end
+  end
+
+  test "trims surrounding whitespace without changing query parameters" do
+    url = "https://example.com/discount/GROUPSHIPPING?group_order_id=abc&return_to=%2Fcart#checkout"
+    qr = QrCode.new(url: "  #{url}\n")
+    assert qr.valid?
+    assert_equal url, qr.url
+  end
+
+  test "only registered templates are valid" do
+    assert_not QrCode.new(url: "https://example.com", template: 4).valid?
+  end
+
   test "generates and saves image" do
     qr = QrCode.create!(url: "https://example.com", template: 1)
     qr.generate_image!

@@ -1,14 +1,21 @@
 # frozen_string_literal: true
 
+require "open3"
+
 module QrTemplates
   class Rounded < Base
     def render_png
-      png = ChunkyPNG::Image.new(image_size, image_size, ChunkyPNG::Color::TRANSPARENT)
+      # A light four-module quiet zone keeps the code readable on any surface.
+      png = ChunkyPNG::Image.new(image_size, image_size, ChunkyPNG::Color(options[:background]))
 
       draw_qr_code(png)
       apply_rounded_corners(png)
 
-      png.to_s
+      # Force RGBA rather than grayscale+alpha for broad viewer compatibility.
+      output, error, status = Open3.capture3("magick", "png:-", "PNG32:-", stdin_data: png.to_s, binmode: true)
+      raise "ImageMagick failed: #{error}" unless status.success?
+
+      output
     end
 
     private
@@ -30,7 +37,7 @@ module QrTemplates
     end
 
     def padding
-      20
+      module_size * 4
     end
 
     def corner_radius
