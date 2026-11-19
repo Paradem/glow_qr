@@ -1,11 +1,11 @@
 source "https://rubygems.org"
 
-ruby ">= 3.1.0"
+ruby file: ".ruby-version"
 
 gem "rqrcode"
 gem "rqrcode_png"
 gem "chunky_png"
-gem "rails", "~> 8.1.1"
+gem "rails", "~> 8.1.4", ">= 8.1.4.1"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 # Use sqlite3 as the database for Active Record
